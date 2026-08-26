@@ -10,13 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AssignmentsRouteImport } from './routes/assignments'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as EmergenciesRouteImport } from './routes/emergencies'
 import { Route as MapRouteImport } from './routes/map'
+import { Route as NetworkRouteImport } from './routes/network'
+import { Route as CommsIdRouteImport } from './routes/comms.$id'
+import { Route as EmergencyIdRouteImport } from './routes/emergency.$id'
+import { Route as NavigateIdRouteImport } from './routes/navigate.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssignmentsRoute = AssignmentsRouteImport.update({
+  id: '/assignments',
+  path: '/assignments',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -34,39 +44,107 @@ const MapRoute = MapRouteImport.update({
   path: '/map',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NetworkRoute = NetworkRouteImport.update({
+  id: '/network',
+  path: '/network',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommsIdRoute = CommsIdRouteImport.update({
+  id: '/comms/$id',
+  path: '/comms/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmergencyIdRoute = EmergencyIdRouteImport.update({
+  id: '/emergency/$id',
+  path: '/emergency/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NavigateIdRoute = NavigateIdRouteImport.update({
+  id: '/navigate/$id',
+  path: '/navigate/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/assignments': typeof AssignmentsRoute
   '/dashboard': typeof DashboardRoute
   '/emergencies': typeof EmergenciesRoute
   '/map': typeof MapRoute
+  '/network': typeof NetworkRoute
+  '/comms/$id': typeof CommsIdRoute
+  '/emergency/$id': typeof EmergencyIdRoute
+  '/navigate/$id': typeof NavigateIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/assignments': typeof AssignmentsRoute
   '/dashboard': typeof DashboardRoute
   '/emergencies': typeof EmergenciesRoute
   '/map': typeof MapRoute
+  '/network': typeof NetworkRoute
+  '/comms/$id': typeof CommsIdRoute
+  '/emergency/$id': typeof EmergencyIdRoute
+  '/navigate/$id': typeof NavigateIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/assignments': typeof AssignmentsRoute
   '/dashboard': typeof DashboardRoute
   '/emergencies': typeof EmergenciesRoute
   '/map': typeof MapRoute
+  '/network': typeof NetworkRoute
+  '/comms/$id': typeof CommsIdRoute
+  '/emergency/$id': typeof EmergencyIdRoute
+  '/navigate/$id': typeof NavigateIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/emergencies' | '/map'
+  fullPaths:
+    | '/'
+    | '/assignments'
+    | '/dashboard'
+    | '/emergencies'
+    | '/map'
+    | '/network'
+    | '/comms/$id'
+    | '/emergency/$id'
+    | '/navigate/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/emergencies' | '/map'
-  id: '__root__' | '/' | '/dashboard' | '/emergencies' | '/map'
+  to:
+    | '/'
+    | '/assignments'
+    | '/dashboard'
+    | '/emergencies'
+    | '/map'
+    | '/network'
+    | '/comms/$id'
+    | '/emergency/$id'
+    | '/navigate/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/assignments'
+    | '/dashboard'
+    | '/emergencies'
+    | '/map'
+    | '/network'
+    | '/comms/$id'
+    | '/emergency/$id'
+    | '/navigate/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AssignmentsRoute: typeof AssignmentsRoute
   DashboardRoute: typeof DashboardRoute
   EmergenciesRoute: typeof EmergenciesRoute
   MapRoute: typeof MapRoute
+  NetworkRoute: typeof NetworkRoute
+  CommsIdRoute: typeof CommsIdRoute
+  EmergencyIdRoute: typeof EmergencyIdRoute
+  NavigateIdRoute: typeof NavigateIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -76,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assignments': {
+      id: '/assignments'
+      path: '/assignments'
+      fullPath: '/assignments'
+      preLoaderRoute: typeof AssignmentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -99,14 +184,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MapRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/network': {
+      id: '/network'
+      path: '/network'
+      fullPath: '/network'
+      preLoaderRoute: typeof NetworkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comms/$id': {
+      id: '/comms/$id'
+      path: '/comms/$id'
+      fullPath: '/comms/$id'
+      preLoaderRoute: typeof CommsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/emergency/$id': {
+      id: '/emergency/$id'
+      path: '/emergency/$id'
+      fullPath: '/emergency/$id'
+      preLoaderRoute: typeof EmergencyIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/navigate/$id': {
+      id: '/navigate/$id'
+      path: '/navigate/$id'
+      fullPath: '/navigate/$id'
+      preLoaderRoute: typeof NavigateIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AssignmentsRoute: AssignmentsRoute,
   DashboardRoute: DashboardRoute,
   EmergenciesRoute: EmergenciesRoute,
   MapRoute: MapRoute,
+  NetworkRoute: NetworkRoute,
+  CommsIdRoute: CommsIdRoute,
+  EmergencyIdRoute: EmergencyIdRoute,
+  NavigateIdRoute: NavigateIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
