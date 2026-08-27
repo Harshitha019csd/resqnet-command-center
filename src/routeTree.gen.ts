@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AssignmentsRouteImport } from './routes/assignments'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as EmergenciesRouteImport } from './routes/emergencies'
+import { Route as HistoryRouteImport } from './routes/history'
 import { Route as MapRouteImport } from './routes/map'
 import { Route as NetworkRouteImport } from './routes/network'
 import { Route as CommsIdRouteImport } from './routes/comms.$id'
@@ -39,6 +40,11 @@ const DashboardRoute = DashboardRouteImport.update({
 const EmergenciesRoute = EmergenciesRouteImport.update({
   id: '/emergencies',
   path: '/emergencies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MapRoute = MapRouteImport.update({
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/assignments': typeof AssignmentsRoute
   '/dashboard': typeof DashboardRoute
   '/emergencies': typeof EmergenciesRoute
+  '/history': typeof HistoryRoute
   '/map': typeof MapRoute
   '/network': typeof NetworkRoute
   '/comms/$id': typeof CommsIdRoute
@@ -95,6 +102,7 @@ export interface FileRoutesByTo {
   '/assignments': typeof AssignmentsRoute
   '/dashboard': typeof DashboardRoute
   '/emergencies': typeof EmergenciesRoute
+  '/history': typeof HistoryRoute
   '/map': typeof MapRoute
   '/network': typeof NetworkRoute
   '/comms/$id': typeof CommsIdRoute
@@ -109,6 +117,7 @@ export interface FileRoutesById {
   '/assignments': typeof AssignmentsRoute
   '/dashboard': typeof DashboardRoute
   '/emergencies': typeof EmergenciesRoute
+  '/history': typeof HistoryRoute
   '/map': typeof MapRoute
   '/network': typeof NetworkRoute
   '/comms/$id': typeof CommsIdRoute
@@ -124,6 +133,7 @@ export interface FileRouteTypes {
     | '/assignments'
     | '/dashboard'
     | '/emergencies'
+    | '/history'
     | '/map'
     | '/network'
     | '/comms/$id'
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
     | '/assignments'
     | '/dashboard'
     | '/emergencies'
+    | '/history'
     | '/map'
     | '/network'
     | '/comms/$id'
@@ -150,6 +161,7 @@ export interface FileRouteTypes {
     | '/assignments'
     | '/dashboard'
     | '/emergencies'
+    | '/history'
     | '/map'
     | '/network'
     | '/comms/$id'
@@ -164,6 +176,7 @@ export interface RootRouteChildren {
   AssignmentsRoute: typeof AssignmentsRoute
   DashboardRoute: typeof DashboardRoute
   EmergenciesRoute: typeof EmergenciesRoute
+  HistoryRoute: typeof HistoryRoute
   MapRoute: typeof MapRoute
   NetworkRoute: typeof NetworkRoute
   CommsIdRoute: typeof CommsIdRoute
@@ -201,6 +214,13 @@ declare module '@tanstack/react-router' {
       path: '/emergencies'
       fullPath: '/emergencies'
       preLoaderRoute: typeof EmergenciesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/map': {
@@ -260,6 +280,7 @@ const rootRouteChildren: RootRouteChildren = {
   AssignmentsRoute: AssignmentsRoute,
   DashboardRoute: DashboardRoute,
   EmergenciesRoute: EmergenciesRoute,
+  HistoryRoute: HistoryRoute,
   MapRoute: MapRoute,
   NetworkRoute: NetworkRoute,
   CommsIdRoute: CommsIdRoute,
