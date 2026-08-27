@@ -63,10 +63,10 @@ function MapPage() {
         </div>
 
         <TacticalMap
-          selectedId={selected?.id}
+          selectedId={selected?.id ?? ""}
           onSelect={setSelected}
           filter={filter}
-          highlightRoute={selected?.route}
+          highlightRoute={selected?.route ?? []}
         />
 
         {selected && (
