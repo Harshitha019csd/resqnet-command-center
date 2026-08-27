@@ -16,6 +16,7 @@ import { Route as EmergenciesRouteImport } from './routes/emergencies'
 import { Route as HistoryRouteImport } from './routes/history'
 import { Route as MapRouteImport } from './routes/map'
 import { Route as NetworkRouteImport } from './routes/network'
+import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as CommsIdRouteImport } from './routes/comms.$id'
 import { Route as EmergencyIdRouteImport } from './routes/emergency.$id'
 import { Route as NavigateIdRouteImport } from './routes/navigate.$id'
@@ -57,6 +58,11 @@ const NetworkRoute = NetworkRouteImport.update({
   path: '/network',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CommsIdRoute = CommsIdRouteImport.update({
   id: '/comms/$id',
   path: '/comms/$id',
@@ -91,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/history': typeof HistoryRoute
   '/map': typeof MapRoute
   '/network': typeof NetworkRoute
+  '/profile': typeof ProfileRoute
   '/comms/$id': typeof CommsIdRoute
   '/emergency/$id': typeof EmergencyIdRoute
   '/navigate/$id': typeof NavigateIdRoute
@@ -105,6 +112,7 @@ export interface FileRoutesByTo {
   '/history': typeof HistoryRoute
   '/map': typeof MapRoute
   '/network': typeof NetworkRoute
+  '/profile': typeof ProfileRoute
   '/comms/$id': typeof CommsIdRoute
   '/emergency/$id': typeof EmergencyIdRoute
   '/navigate/$id': typeof NavigateIdRoute
@@ -120,6 +128,7 @@ export interface FileRoutesById {
   '/history': typeof HistoryRoute
   '/map': typeof MapRoute
   '/network': typeof NetworkRoute
+  '/profile': typeof ProfileRoute
   '/comms/$id': typeof CommsIdRoute
   '/emergency/$id': typeof EmergencyIdRoute
   '/navigate/$id': typeof NavigateIdRoute
@@ -136,6 +145,7 @@ export interface FileRouteTypes {
     | '/history'
     | '/map'
     | '/network'
+    | '/profile'
     | '/comms/$id'
     | '/emergency/$id'
     | '/navigate/$id'
@@ -150,6 +160,7 @@ export interface FileRouteTypes {
     | '/history'
     | '/map'
     | '/network'
+    | '/profile'
     | '/comms/$id'
     | '/emergency/$id'
     | '/navigate/$id'
@@ -164,6 +175,7 @@ export interface FileRouteTypes {
     | '/history'
     | '/map'
     | '/network'
+    | '/profile'
     | '/comms/$id'
     | '/emergency/$id'
     | '/navigate/$id'
@@ -179,6 +191,7 @@ export interface RootRouteChildren {
   HistoryRoute: typeof HistoryRoute
   MapRoute: typeof MapRoute
   NetworkRoute: typeof NetworkRoute
+  ProfileRoute: typeof ProfileRoute
   CommsIdRoute: typeof CommsIdRoute
   EmergencyIdRoute: typeof EmergencyIdRoute
   NavigateIdRoute: typeof NavigateIdRoute
@@ -237,6 +250,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NetworkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/comms/$id': {
       id: '/comms/$id'
       path: '/comms/$id'
@@ -283,6 +303,7 @@ const rootRouteChildren: RootRouteChildren = {
   HistoryRoute: HistoryRoute,
   MapRoute: MapRoute,
   NetworkRoute: NetworkRoute,
+  ProfileRoute: ProfileRoute,
   CommsIdRoute: CommsIdRoute,
   EmergencyIdRoute: EmergencyIdRoute,
   NavigateIdRoute: NavigateIdRoute,
