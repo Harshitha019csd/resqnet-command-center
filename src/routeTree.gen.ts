@@ -18,6 +18,7 @@ import { Route as NetworkRouteImport } from './routes/network'
 import { Route as CommsIdRouteImport } from './routes/comms.$id'
 import { Route as EmergencyIdRouteImport } from './routes/emergency.$id'
 import { Route as NavigateIdRouteImport } from './routes/navigate.$id'
+import { Route as VictimIdRouteImport } from './routes/victim.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,6 +65,11 @@ const NavigateIdRoute = NavigateIdRouteImport.update({
   path: '/navigate/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VictimIdRoute = VictimIdRouteImport.update({
+  id: '/victim/$id',
+  path: '/victim/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/comms/$id': typeof CommsIdRoute
   '/emergency/$id': typeof EmergencyIdRoute
   '/navigate/$id': typeof NavigateIdRoute
+  '/victim/$id': typeof VictimIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/comms/$id': typeof CommsIdRoute
   '/emergency/$id': typeof EmergencyIdRoute
   '/navigate/$id': typeof NavigateIdRoute
+  '/victim/$id': typeof VictimIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/comms/$id': typeof CommsIdRoute
   '/emergency/$id': typeof EmergencyIdRoute
   '/navigate/$id': typeof NavigateIdRoute
+  '/victim/$id': typeof VictimIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/comms/$id'
     | '/emergency/$id'
     | '/navigate/$id'
+    | '/victim/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/comms/$id'
     | '/emergency/$id'
     | '/navigate/$id'
+    | '/victim/$id'
   id:
     | '__root__'
     | '/'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/comms/$id'
     | '/emergency/$id'
     | '/navigate/$id'
+    | '/victim/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,6 +157,7 @@ export interface RootRouteChildren {
   CommsIdRoute: typeof CommsIdRoute
   EmergencyIdRoute: typeof EmergencyIdRoute
   NavigateIdRoute: typeof NavigateIdRoute
+  VictimIdRoute: typeof VictimIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -212,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NavigateIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/victim/$id': {
+      id: '/victim/$id'
+      path: '/victim/$id'
+      fullPath: '/victim/$id'
+      preLoaderRoute: typeof VictimIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -225,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   CommsIdRoute: CommsIdRoute,
   EmergencyIdRoute: EmergencyIdRoute,
   NavigateIdRoute: NavigateIdRoute,
+  VictimIdRoute: VictimIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
